@@ -1,39 +1,47 @@
-let container = document.querySelector('.container')
-let height = container.clientHeight - 50
-let width = container.clientWidth - 50
-let balls = document.querySelectorAll('.ball')
+let container = document.querySelector(".container");
+let height = container.clientHeight;
+let width = container.clientWidth;
 
-function test(ball) {
-    let top = height / 2
-    let left = width / 2
+const addBalls = (number) => {
+  for (let i = 0; i < number; i++) {
+    container.innerHTML += '<div class="ball"></div>';
+  }
+};
 
-    setInterval(() => {
-        top = updateCoordinate(top, height, 50)
-        ball.style.top = top + 'px'
+const move = (ball) => {
+  let top = Math.random() * height;
+  let left = Math.random() * width;
 
-        left = updateCoordinate(left, width, 50)
-        ball.style.left = left + 'px'
+  setInterval(() => {
+    top = updateCoordinate(top, height, 0);
+    ball.style.top = top + "px";
 
-        ball.style.opacity = Math.random()
+    left = updateCoordinate(left, width, 0);
+    ball.style.left = left + "px";
 
-        const scale = Math.random() * 2
-        ball.style.transform = `scale(${scale + (Math.random() - 0.5)})`
-    }, 100)
-}
+    ball.style.opacity = Math.random();
+  }, 100);
+};
 
-function updateCoordinate(initialValue, upperMargin, lowerMargin) {
-    let newValue = initialValue
-    let delta = (Math.random() - 0.5) * 100
-    newValue += delta
-    if (newValue < lowerMargin) {
-        newValue = lowerMargin
-    }
-    if (newValue > upperMargin) {
-        newValue = upperMargin
-    }
-    return newValue
-}
+const updateCoordinate = (initialValue, upperMargin, lowerMargin) => {
+  let newValue = initialValue;
+  let delta = (Math.random() - 0.5) * 100;
+  newValue += delta;
+  if (newValue < lowerMargin) {
+    newValue = lowerMargin;
+  }
+  if (newValue > upperMargin) {
+    newValue = upperMargin;
+  }
+  return newValue;
+};
 
-balls.forEach(ball => {
-    test(ball)
-})
+const startMovement = () => {
+  let balls = document.querySelectorAll(".ball");
+  balls.forEach((ball) => {
+    move(ball);
+  });
+};
+
+addBalls(30);
+startMovement();
