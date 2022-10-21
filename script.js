@@ -2,24 +2,24 @@ let container = document.querySelector(".container");
 let height = container.clientHeight;
 let width = container.clientWidth;
 
-const addBalls = (number) => {
+const addStars = (number) => {
   for (let i = 0; i < number; i++) {
-    container.innerHTML += '<div class="ball"></div>';
+    container.innerHTML += '<div class="star"></div>';
   }
 };
 
-const move = (ball) => {
+const move = (star) => {
   let top = Math.random() * height;
   let left = Math.random() * width;
 
   setInterval(() => {
     top = updateCoordinate(top, height, 0);
-    ball.style.top = top + "px";
+    star.style.top = top + "px";
 
     left = updateCoordinate(left, width, 0);
-    ball.style.left = left + "px";
+    star.style.left = left + "px";
 
-    ball.style.opacity = Math.random();
+    star.style.opacity = Math.random();
   }, 100);
 };
 
@@ -37,11 +37,11 @@ const updateCoordinate = (initialValue, upperMargin, lowerMargin) => {
 };
 
 const startMovement = () => {
-  let balls = document.querySelectorAll(".ball");
-  balls.forEach((ball) => {
-    move(ball);
+  let stars = document.querySelectorAll(".star");
+  stars.forEach((star) => {
+    move(star);
   });
 };
 
-addBalls(30);
+addStars(100);
 startMovement();
